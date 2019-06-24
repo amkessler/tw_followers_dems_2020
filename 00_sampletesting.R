@@ -5,10 +5,10 @@ library(tidyverse)
 library(UpSetR)
 
 # get a list of twitter handles you want to compare (I left out Hadley because everyone follows him)
-rstaters <- c("PeteButtigieg")
+rstaters <- c("GovernorBullock")
 
 # scrape the user_id of all followers for each handle in the list and bind into 1 dataframe
-followers <- map_df(rstaters, ~ get_followers(.x, n = 2000000, retryonratelimit = TRUE) %>% mutate(account = .x))
+followers <- map_df(rstaters, ~ get_followers(.x, n = 200000, retryonratelimit = TRUE) %>% mutate(account = .x))
 
 # We should now have a long 2 column dataframe with user_id (followers) and the hande of who 
 # they are following in another. Let’s take a peek.
@@ -16,7 +16,7 @@ followers <- map_df(rstaters, ~ get_followers(.x, n = 2000000, retryonratelimit 
 head(followers)
 
 #save as RDS
-saveRDS(followers, "processed_data/followers_buttigieg.rds")
+saveRDS(followers, "processed_data/followers_bullock.rds")
 
 # 
 # 
